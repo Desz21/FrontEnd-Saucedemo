@@ -6,7 +6,6 @@ import { CheckoutPage } from '../pages/CheckoutPage';
 import { World } from '../support/world';
 
 // El Background del shopping.feature reutiliza los steps de login.steps.ts
-// No los redefinimos aquí — Cucumber los encuentra automáticamente
 
 When('agrega un producto al carrito', async function (this: World) {
   const inventoryPage = new InventoryPage(this.page);
