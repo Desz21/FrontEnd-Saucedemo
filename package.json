@@ -1,0 +1,16 @@
+{
+  "name": "reto-front",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "cucumber-js",
+    "test:report": "cucumber-js --format html:reports/report.html"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.0.0",
+    "@cucumber/html-formatter": "^23.0.0",
+    "@playwright/test": "^1.40.0",
+    "playwright": "^1.40.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}
