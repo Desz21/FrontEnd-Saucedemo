@@ -15,7 +15,6 @@ AfterAll(async () => {
 });
 
 // Before: se ejecuta antes de cada escenario
-// Creamos un contexto y página nuevos para que cada test sea independiente
 Before(async function (this: World) {
   this.context = await browser.newContext();
   this.page = await this.context.newPage();
