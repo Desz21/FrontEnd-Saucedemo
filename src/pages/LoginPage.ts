@@ -1,7 +1,6 @@
 import { Page } from 'playwright';
 
 // Page Object Model: encapsula los selectores y acciones de la página de login
-// Ventaja: si cambia un selector, solo lo cambiamos aquí y no en todos los tests
 export class LoginPage {
 private page: Page;
 
