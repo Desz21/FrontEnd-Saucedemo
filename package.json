@@ -12,5 +12,10 @@
     "playwright": "^1.40.0",
     "ts-node": "^10.9.0",
     "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "test": "cucumber-js",
+    "test:report": "cucumber-js --format html:reports/report.html",
+    "test:playwright": "playwright test --reporter=html"
   }
 }

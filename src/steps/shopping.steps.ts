@@ -1,11 +1,26 @@
-import { When, Then, Given } from '@cucumber/cucumber';
+import { When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import { World } from '../support/world';
 
-// El Background del shopping.feature reutiliza los steps de login.steps.ts
+// Nuevo step que agrega N productos según el valor de la tabla Examples
+// Cada producto tiene un selector diferente en la página
+When('agrega {string} productos al carrito', async function (this: World, cantidad: string) {
+  const inventoryPage = new InventoryPage(this.page);
+  const num = parseInt(cantidad);
+
+  // Agregamos productos en orden según la cantidad solicitada
+  if (num >= 1) await inventoryPage.addProductToCart();
+  if (num >= 2) await inventoryPage.addSecondProductToCart();
+});
+
+Then('el carrito debe mostrar {string} productos', async function (this: World, count: string) {
+  const inventoryPage = new InventoryPage(this.page);
+  const cartCount = await inventoryPage.getCartCount();
+  expect(cartCount).toBe(count);
+});
 
 When('agrega un producto al carrito', async function (this: World) {
   const inventoryPage = new InventoryPage(this.page);

@@ -1,13 +1,15 @@
 Feature: Login en Sauce Demo
 
-  # Escenario positivo: usuario estándar puede ingresar
-  Scenario: Login exitoso con usuario estándar
+  # Scenario Outline corre el mismo escenario una vez por cada fila de la tabla Examples
+  # Los <placeholders> se reemplazan con los valores de cada fila automáticamente
+  Scenario Outline: Login con diferentes tipos de usuario
     Given el usuario está en la página de login
-    When ingresa usuario "standard_user" y contraseña "secret_sauce"
-    Then debe ver la página de inventario
+    When ingresa usuario "<usuario>" y contraseña "<password>"
+    Then debe ver resultado "<resultado>"
 
-  # Escenario negativo: usuario bloqueado no puede ingresar
-  Scenario: Login fallido con usuario bloqueado
-    Given el usuario está en la página de login
-    When ingresa usuario "locked_out_user" y contraseña "secret_sauce"
-    Then debe ver el mensaje de error "Epic sadface: Sorry, this user has been locked out."
+    # Cada fila es una ejecución independiente del escenario
+    Examples:
+      | usuario           | password     | resultado  |
+      | standard_user     | secret_sauce | inventario |
+      | locked_out_user   | secret_sauce | bloqueado  |
+      | invalid_user      | wrong_pass   | invalido   |

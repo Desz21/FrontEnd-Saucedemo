@@ -1,18 +1,30 @@
 Feature: Flujo de compra en Sauce Demo
 
   Background:
-    # El Background se ejecuta antes de cada escenario del feature
     Given el usuario está en la página de login
     And ingresa usuario "standard_user" y contraseña "secret_sauce"
 
-  Scenario: Agregar producto al carrito
-    When agrega un producto al carrito
-    Then el carrito debe mostrar 1 producto
+  # Prueba agregar diferentes cantidades de productos
+  Scenario Outline: Agregar productos al carrito
+    When agrega "<cantidad>" productos al carrito
+    Then el carrito debe mostrar "<cantidad>" productos
 
-  Scenario: Completar proceso de compra
+    Examples:
+      | cantidad |
+      | 1        |
+      | 2        |
+
+  # Prueba el checkout con diferentes datos de envío
+  Scenario Outline: Completar compra con diferentes datos de envío
     When agrega un producto al carrito
     And va al carrito
     And procede al checkout
-    And completa los datos de envío "John" "Doe" "12345"
+    And completa los datos de envío "<nombre>" "<apellido>" "<codigo>"
     And confirma la compra
     Then debe ver el mensaje de confirmación "Thank you for your order!"
+
+    Examples:
+      | nombre  | apellido | codigo |
+      | John    | Doe      | 12345  |
+      | María   | García   | 28001  |
+      | Carlos  | López    | 15000  |
